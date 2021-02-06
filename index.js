@@ -121,6 +121,10 @@ function makePdfTemplate(invoiceData, lineItemsData, payeeInfo) {
   mainInvoiceTable.push(["", {text: "Total", alignment: 'right', bold: true, colSpan: 2, border: [false, false, false, true]}, '', {text: total, border: [false, false, false, true]}])
   
   return {
+    info: {
+      title: `Invoice ${invoiceName}`,
+      author: contactName,
+    },
     pageSize: 'A4',
     pageMargins: [ 40, 30, 40, 20 ],
     content: [
@@ -245,9 +249,11 @@ exports.pdfMaker = async (req, res) => {
   const invoiceData = await getInvoiceData(codaInvoiceRowId);
   const lineItemsData = await getLineItemsData(codaInvoiceRowId);
   const payeeInfo = await getPayeeInfo();
+  const fileName = `${payeeInfo["c-W_GP1tCFwr"]} - ${invoiceData["c-wOi0A9rzXo"]} ${invoiceData["c-m0YYVpia4p"]} - Invoice ${invoiceData["c-JlGsEx_iDw"]}`
 
   generatePdf(makePdfTemplate(invoiceData, lineItemsData, payeeInfo), (response) => {
-    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Type', 'application/pdf;');
+    res.setHeader('Content-Disposition', 'inline; filename=' + fileName )
     res.send(response); // sends a base64 encoded string to client
   });
 };
