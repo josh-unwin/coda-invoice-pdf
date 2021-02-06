@@ -5,10 +5,6 @@
  * @param {!express:Response} res HTTP response context.
  */
 
-// String.prototype.clean = function( arg ) {
-//   return this.valueOf().replace(/[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/g, "")
-// };
-
 const { default: axios } = require('axios');
 
 function generatePdf(docDefinition, callback) {
@@ -241,7 +237,6 @@ function makePdfTemplate(invoiceData, lineItemsData, payeeInfo) {
     },
   }
 };
-
 
 exports.pdfMaker = async (req, res) => {
   require('dotenv').config();
