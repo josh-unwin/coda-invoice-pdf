@@ -1,0 +1,14 @@
+{
+  "name": "sample-http",
+  "version": "0.0.1",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^1.7.1",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.1",
+    "pdfmake": "^0.1.70"
+  },
+  "scripts": {
+    "start": "functions-framework --target=pdfMaker"
+  }
+}
